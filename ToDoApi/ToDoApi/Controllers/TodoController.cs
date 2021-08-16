@@ -12,7 +12,6 @@ namespace ToDoApi.Controllers
     public class TodoController : ControllerBase
     {
         TasksContext db;
-
         public TodoController(TasksContext context)
         {
             db = context;
@@ -37,7 +36,6 @@ namespace ToDoApi.Controllers
             return new ObjectResult(task);
         }
 
-        // POST api/tasks
         [HttpPost]
         public async Task<ActionResult<TodoItem>> Post(TodoItem task)
         {
@@ -51,7 +49,6 @@ namespace ToDoApi.Controllers
             return Ok(task);
         }
 
-        // PUT api/tasks/
         [HttpPut]
         public async Task<ActionResult<TodoItem>> Put(TodoItem task)
         {
@@ -69,7 +66,6 @@ namespace ToDoApi.Controllers
             return Ok(task);
         }
 
-        // DELETE api/tasks/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<TodoItem>> Delete(int id)
         {

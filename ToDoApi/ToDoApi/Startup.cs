@@ -22,8 +22,7 @@ namespace ToDoApi
 		public void ConfigureServices(IServiceCollection services)
 		{
 
-			services.AddDbContext<TasksContext>(x => x.UseSqlServer("Data Source=MEGATA4KA;Initial Catalog=TaskManager;Integrated Security=True;Connect Timeout=30;"));
-			//services.AddDatabaseDeveloperPageExceptionFilter();
+			services.AddDbContext<TasksContext>(x => x.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 			services.AddControllers();
 			services.AddSwaggerGen(c =>
 			{
