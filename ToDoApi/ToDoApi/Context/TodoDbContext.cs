@@ -1,11 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ToDoApi.Models;
 
-namespace ToDoApi.Models
+namespace ToDoApi.Context
 {
-	public class TasksContext : DbContext
+	public class TodoDbContext : DbContext
     {
-        public DbSet<TodoItem> Tasks { get; set; }
-        public TasksContext(DbContextOptions<TasksContext> options)
+        public DbSet<TodoItem> TodoItems { get; set; }
+        public TodoDbContext(DbContextOptions<TodoDbContext> options)
             : base(options)
         {
             Database.EnsureCreated();
