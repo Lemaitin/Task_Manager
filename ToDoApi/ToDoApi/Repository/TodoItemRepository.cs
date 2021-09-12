@@ -21,6 +21,7 @@ namespace ToDoApi.Repository
 		{
 			return await _db.TodoItems.ToListAsync();
 		}
+
 		public async Task <TodoItem> GetItem(int id)
 		{
 			return await _db.TodoItems.FindAsync(id);
@@ -42,6 +43,7 @@ namespace ToDoApi.Repository
 			if (item != null)
 				_db.TodoItems.Remove(item);
 		}
+
 		public void Save()
 		{
 			_db.SaveChanges();
@@ -60,6 +62,7 @@ namespace ToDoApi.Repository
 				disposed = true;
 			}
 		}
+
 		public void Dispose()
 		{
 			Dispose(true);

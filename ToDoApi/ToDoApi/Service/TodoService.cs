@@ -16,6 +16,7 @@ namespace ToDoApi.Service
 		{
 			_itodoItemRepository = todoItemRepository;
 		}
+
 		public async Task<IEnumerable<TodoItem>> GetItemList()
 		{
 			return await _itodoItemRepository.GetItemList();

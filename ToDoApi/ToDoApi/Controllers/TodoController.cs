@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using ToDoApi.Models;
 using ToDoApi.Service.Interfaces;
-using ToDoApi.Repository.Interfaces;
 
 namespace ToDoApi.Controllers
 {
@@ -29,10 +28,10 @@ namespace ToDoApi.Controllers
 		{
 			TodoItem todoItem = await _todoService.GetItem(id);
 			if (todoItem == null)
+
 				return NotFound();
+
 			return new ObjectResult(todoItem);
 		}
-
-
 	}
 }
