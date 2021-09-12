@@ -27,9 +27,11 @@ namespace ToDoApi.Controllers
 		public async Task<ActionResult<TodoItem>> Get(int id)
 		{
 			TodoItem todoItem = await _todoService.GetItem(id);
-			if (todoItem == null)
 
+			if (todoItem == null)
+			{
 				return NotFound();
+			}
 
 			return new ObjectResult(todoItem);
 		}
