@@ -4,10 +4,16 @@ using ToDoApi.Models;
 
 namespace ToDoApi.Service.Interfaces
 {
-	public interface ITodoService
-	{
-		Task<IEnumerable<TodoItem>> GetItemList();
+    public interface ITodoService
+    {
+        Task<IEnumerable<TodoItem>> GetItemsAsync();
 
-		Task<TodoItem> GetItem(int id);
-	}
+        Task<TodoItem> GetItemAsync(int id);
+
+        Task CreateAsync(TodoItem item);
+
+        Task UpdateAsync(TodoItem item);
+
+        Task DeleteAsync(int id);
+    }
 }
