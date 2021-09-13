@@ -1,22 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using ToDoApi.Models;
 
 namespace ToDoApi.Repository.Interfaces
 {
-    public interface ITodoItemRepository : IDisposable
+	public interface ITodoItemRepository
     {
-        Task<IEnumerable<TodoItem>> GetItemList();
+        Task<IEnumerable<TodoItem>> GetItemsAsync();
 
-        Task <TodoItem> GetItem(int id);
+        Task<TodoItem> GetItemAsync(int id);
 
-        void Create(TodoItem item);
+        Task CreateAsync(TodoItem item);
 
-        void Update(TodoItem item);
+        Task UpdateAsync(TodoItem item);
 
-        Task Delete(int id);
-
-        //Task <TodoItem> Save();
+        Task DeleteAsync(int id);
 	}
 }

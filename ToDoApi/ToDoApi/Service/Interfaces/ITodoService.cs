@@ -6,16 +6,14 @@ namespace ToDoApi.Service.Interfaces
 {
 	public interface ITodoService
 	{
-		Task<IEnumerable<TodoItem>> GetItemList();
+		Task<IEnumerable<TodoItem>> GetItemsAsync();
 
-		Task<TodoItem> GetItem(int id);
+		Task<TodoItem> GetItemAsync(int id);
 
-		void Create(TodoItem item);
+		Task CreateAsync(TodoItem item);
 
-		void Update(TodoItem item);
+		Task UpdateAsync(TodoItem item);
 
-		Task Delete (int id);
-
-		//Task<TodoItem> Save();
+		Task DeleteAsync(int id);
 	}
 }

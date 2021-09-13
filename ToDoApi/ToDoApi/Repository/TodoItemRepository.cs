@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ToDoApi.Context;
@@ -19,63 +17,38 @@ namespace ToDoApi.Repository
 			_db = db;
 		}
 
-		public async Task <IEnumerable<TodoItem>> GetItemList()
+		public async Task <IEnumerable<TodoItem>> GetItemsAsync()
 		{
 			return await _db.TodoItems.ToListAsync();
 		}
 
-		public async Task <TodoItem> GetItem(int id)
+		public async Task <TodoItem> GetItemAsync(int id)
 		{
 			return await _db.TodoItems.FindAsync(id);
 		}
 
-		public void Create(TodoItem item)
+		public async Task CreateAsync(TodoItem item)
 		{
 			_db.TodoItems.Add(item);
-			_db.SaveChanges();
+			await _db.SaveChangesAsync();
 		}
 
-		public void Update(TodoItem item)
+		public async Task UpdateAsync(TodoItem item)
 		{
 			_db.Entry(item).State = EntityState.Modified;
 			_db.Update(item);
-			_db.SaveChanges();
+			await _db.SaveChangesAsync();
 		}
 
-		public async Task Delete(int id)
+		public async Task DeleteAsync(int id)
 		{
-			var todoItem = await GetItem(id);
+			var todoItem = await GetItemAsync(id);
 
 			if (todoItem != null)
 			{
 				_db.TodoItems.Remove(todoItem);
 				await _db.SaveChangesAsync();
 			}
-		}
-
-		//public async Task <TodoItem> Save()
-		//{
-		//	return await _db.SaveChanges();
-		//}
-
-		private bool disposed = false;
-
-		protected virtual void Dispose(bool disposing)
-		{
-			if (!disposed)
-			{
-				if (disposing)
-				{
-					_db.Dispose();
-				}
-				disposed = true;
-			}
-		}
-
-		public void Dispose()
-		{
-			Dispose(true);
-			GC.SuppressFinalize(this);
 		}
 	}
 }

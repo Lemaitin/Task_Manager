@@ -1,9 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
 using ToDoApi.Models;
 
 namespace ToDoApi.Context
 {
-	public class TodoDbContext : DbContext
+	public class TodoDbContext : DbContext, IDisposable
     {
         public DbSet<TodoItem> TodoItems { get; set; }
 

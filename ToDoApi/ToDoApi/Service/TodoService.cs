@@ -15,34 +15,29 @@ namespace ToDoApi.Service
 			_itodoItemRepository = todoItemRepository;
 		}
 
-		public async Task<IEnumerable<TodoItem>> GetItemList()
+		public async Task<IEnumerable<TodoItem>> GetItemsAsync()
 		{
-			return await _itodoItemRepository.GetItemList();
+			return await _itodoItemRepository.GetItemsAsync();
 		}
 
-		public async Task<TodoItem> GetItem(int id)
+		public async Task<TodoItem> GetItemAsync(int id)
 		{
-			return await _itodoItemRepository.GetItem(id);
+			return await _itodoItemRepository.GetItemAsync(id);
 		}
 
-		public void Create(TodoItem item)
+		public async Task CreateAsync(TodoItem item)
 		{
-			 _itodoItemRepository.Create(item);
+			 await _itodoItemRepository.CreateAsync(item);
 		}
 
-		public void Update(TodoItem item)
+		public async Task UpdateAsync(TodoItem item)
 		{
-			_itodoItemRepository.Update(item);
+			await _itodoItemRepository.UpdateAsync(item);
 		}
 
-		public async Task Delete(int id)
+		public async Task DeleteAsync(int id)
 		{
-			await _itodoItemRepository.Delete(id);
+			await _itodoItemRepository.DeleteAsync(id);
 		}
-
-		//public async Task<TodoItem> Save()
-		//{
-		//	return await _itodoItemRepository.Save();
-		//}
 	}
 }

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using ToDoApi.Models;
 using ToDoApi.Service.Interfaces;
+using NSwag.Annotations;
 
 namespace ToDoApi.Controllers
 {
@@ -18,15 +19,21 @@ namespace ToDoApi.Controllers
 		}
 
 		[HttpGet]
-		public async Task<ActionResult<IEnumerable<TodoItem>>> Get()
+		[Route("getItems")]
+		[SwaggerDefaultResponse]
+		[SwaggerResponse(500, typeof(TodoItem))]
+		public async Task<ActionResult<IEnumerable<TodoItem>>> GetItems()
 		{
-			return Ok(await _todoService.GetItemList());
+			return Ok(await _todoService.GetItemsAsync());
 		}
 
 		[HttpGet("{id}")]
-		public async Task<ActionResult<TodoItem>> Get(int id)
+		[Route("getItem")]
+		[SwaggerDefaultResponse]
+		[SwaggerResponse(500, typeof(TodoItem))]
+		public async Task<ActionResult<TodoItem>> GetItem(int id)
 		{
-			TodoItem todoItem = await _todoService.GetItem(id);
+			TodoItem todoItem = await _todoService.GetItemAsync(id);
 
 			if (todoItem == null)
 			{
@@ -37,34 +44,40 @@ namespace ToDoApi.Controllers
 		}
 
 		[HttpPost]
-		public void Post(TodoItem item)
+		[Route("createItem")]
+		[SwaggerDefaultResponse]
+		[SwaggerResponse(500, typeof(TodoItem))]
+		public async Task CreateItem(TodoItem item)
 		{
-			_todoService.Create(item);
-
 			if (item == null)
 			{
 				BadRequest();
 			}
 
-			Ok(item);
+			await _todoService.CreateAsync(item);
 		}
-		[HttpPut]
-		public void Put(TodoItem item)
-		{
-			_todoService.Update(item);
 
+		[HttpPut]
+		[Route("updateItem")]
+		[SwaggerDefaultResponse]
+		[SwaggerResponse(500, typeof(TodoItem))]
+		public async Task UpdateItem(TodoItem item)
+		{
 			if (item == null)
 			{
 				BadRequest();
 			}
 
-			Ok(item);
+			await _todoService.UpdateAsync(item);
 		}
 
 		[HttpDelete("{id}")]
-		public async Task Delete(int id)
+		[Route("deleteItem")]
+		[SwaggerDefaultResponse]
+		[SwaggerResponse(500, typeof(TodoItem))]
+		public async Task DeleteItem(int id)
 		{
-			await _todoService.Delete(id);
+			await _todoService.DeleteAsync(id);
 		}
 	}
 }
