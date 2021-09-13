@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using ToDoApi.Models;
 using ToDoApi.Service.Interfaces;
-using NSwag.Annotations;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace ToDoApi.Controllers
 {
@@ -20,17 +20,16 @@ namespace ToDoApi.Controllers
 
 		[HttpGet]
 		[Route("getItems")]
-		[SwaggerDefaultResponse]
-		[SwaggerResponse(500, typeof(TodoItem))]
+		[SwaggerResponse(200)]
+		[SwaggerResponse(500)]
 		public async Task<ActionResult<IEnumerable<TodoItem>>> GetItems()
 		{
 			return Ok(await _todoService.GetItemsAsync());
 		}
 
-		[HttpGet("{id}")]
-		[Route("getItem")]
-		[SwaggerDefaultResponse]
-		[SwaggerResponse(500, typeof(TodoItem))]
+		[HttpGet("getItem/{id}")]
+		[SwaggerResponse(200)]
+		[SwaggerResponse(500)]
 		public async Task<ActionResult<TodoItem>> GetItem(int id)
 		{
 			TodoItem todoItem = await _todoService.GetItemAsync(id);
@@ -45,8 +44,8 @@ namespace ToDoApi.Controllers
 
 		[HttpPost]
 		[Route("createItem")]
-		[SwaggerDefaultResponse]
-		[SwaggerResponse(500, typeof(TodoItem))]
+		[SwaggerResponse(200)]
+		[SwaggerResponse(500)]
 		public async Task CreateItem(TodoItem item)
 		{
 			if (item == null)
@@ -59,8 +58,8 @@ namespace ToDoApi.Controllers
 
 		[HttpPut]
 		[Route("updateItem")]
-		[SwaggerDefaultResponse]
-		[SwaggerResponse(500, typeof(TodoItem))]
+		[SwaggerResponse(200)]
+		[SwaggerResponse(500)]
 		public async Task UpdateItem(TodoItem item)
 		{
 			if (item == null)
@@ -71,10 +70,9 @@ namespace ToDoApi.Controllers
 			await _todoService.UpdateAsync(item);
 		}
 
-		[HttpDelete("{id}")]
-		[Route("deleteItem")]
-		[SwaggerDefaultResponse]
-		[SwaggerResponse(500, typeof(TodoItem))]
+		[HttpDelete("deleteItem/{id}")]
+		[SwaggerResponse(200)]
+		[SwaggerResponse(500)]
 		public async Task DeleteItem(int id)
 		{
 			await _todoService.DeleteAsync(id);
