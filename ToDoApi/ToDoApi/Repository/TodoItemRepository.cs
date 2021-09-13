@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using ToDoApi.Context;
 using ToDoApi.Models;
 using ToDoApi.Repository.Interfaces;
+
 
 namespace ToDoApi.Repository
 {
@@ -26,28 +28,35 @@ namespace ToDoApi.Repository
 		{
 			return await _db.TodoItems.FindAsync(id);
 		}
-		
+
 		public void Create(TodoItem item)
 		{
 			_db.TodoItems.Add(item);
+			_db.SaveChanges();
 		}
 
 		public void Update(TodoItem item)
 		{
 			_db.Entry(item).State = EntityState.Modified;
-		}
-
-		public void Delete(int id)
-		{
-			TodoItem item = _db.TodoItems.Find(id);
-			if (item != null)
-				_db.TodoItems.Remove(item);
-		}
-
-		public void Save()
-		{
+			_db.Update(item);
 			_db.SaveChanges();
 		}
+
+		public async Task Delete(int id)
+		{
+			var todoItem = await GetItem(id);
+
+			if (todoItem != null)
+			{
+				_db.TodoItems.Remove(todoItem);
+				await _db.SaveChangesAsync();
+			}
+		}
+
+		//public async Task <TodoItem> Save()
+		//{
+		//	return await _db.SaveChanges();
+		//}
 
 		private bool disposed = false;
 

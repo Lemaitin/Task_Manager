@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using ToDoApi.Models;
 using ToDoApi.Service.Interfaces;
@@ -26,5 +24,25 @@ namespace ToDoApi.Service
 		{
 			return await _itodoItemRepository.GetItem(id);
 		}
+
+		public void Create(TodoItem item)
+		{
+			 _itodoItemRepository.Create(item);
+		}
+
+		public void Update(TodoItem item)
+		{
+			_itodoItemRepository.Update(item);
+		}
+
+		public async Task Delete(int id)
+		{
+			await _itodoItemRepository.Delete(id);
+		}
+
+		//public async Task<TodoItem> Save()
+		//{
+		//	return await _itodoItemRepository.Save();
+		//}
 	}
 }

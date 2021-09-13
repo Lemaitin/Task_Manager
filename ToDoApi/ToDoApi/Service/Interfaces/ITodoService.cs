@@ -9,5 +9,13 @@ namespace ToDoApi.Service.Interfaces
 		Task<IEnumerable<TodoItem>> GetItemList();
 
 		Task<TodoItem> GetItem(int id);
+
+		void Create(TodoItem item);
+
+		void Update(TodoItem item);
+
+		Task Delete (int id);
+
+		//Task<TodoItem> Save();
 	}
 }

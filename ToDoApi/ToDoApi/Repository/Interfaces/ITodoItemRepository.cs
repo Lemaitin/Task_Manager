@@ -15,8 +15,8 @@ namespace ToDoApi.Repository.Interfaces
 
         void Update(TodoItem item);
 
-        void Delete(int id);
+        Task Delete(int id);
 
-        void Save();
+        //Task <TodoItem> Save();
 	}
 }
