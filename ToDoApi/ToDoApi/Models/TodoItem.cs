@@ -2,7 +2,7 @@
 
 namespace ToDoApi.Models
 {
-	public class TodoItem
+    public class TodoItem
     {
         [Key]
         public int Id { get; set; }

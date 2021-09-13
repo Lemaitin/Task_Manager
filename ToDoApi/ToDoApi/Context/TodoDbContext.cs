@@ -4,7 +4,7 @@ using ToDoApi.Models;
 
 namespace ToDoApi.Context
 {
-	public class TodoDbContext : DbContext, IDisposable
+    public class TodoDbContext : DbContext, IDisposable
     {
         public DbSet<TodoItem> TodoItems { get; set; }
 

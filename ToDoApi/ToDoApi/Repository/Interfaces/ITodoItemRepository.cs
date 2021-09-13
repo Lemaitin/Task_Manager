@@ -4,7 +4,7 @@ using ToDoApi.Models;
 
 namespace ToDoApi.Repository.Interfaces
 {
-	public interface ITodoItemRepository
+    public interface ITodoItemRepository
     {
         Task<IEnumerable<TodoItem>> GetItemsAsync();
 
@@ -15,5 +15,5 @@ namespace ToDoApi.Repository.Interfaces
         Task UpdateAsync(TodoItem item);
 
         Task DeleteAsync(int id);
-	}
+    }
 }
